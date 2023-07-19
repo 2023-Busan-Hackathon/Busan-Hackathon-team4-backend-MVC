@@ -70,11 +70,30 @@
         /* '공개 여부' 텍스트의 색상을 파란색으로 설정 */
         .pub {
             color: #007bff;
+            font-size: 0.8em;
         }
 
         /* '생성 날짜' 텍스트의 색상을 초록색으로 설정 */
         .cre {
             color: #28a745;
+            font-size: 0.8em;
+        }
+
+        .recipe-detail button {
+            margin-top: 20px; /* 버튼 위쪽 간격 조정 */
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* 버튼에 호버 효과를 추가합니다. */
+        .recipe-detail button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -97,8 +116,17 @@
     <p th:utext="'<h3>재료:</h3>' + ${recipeDto.ingredient}"></p>
     <p th:utext="'<h3>조리 방법:</h3>' + ${recipeDto.method}"></p>
     <p class="pub" th:text="'공개 여부: ' + ${recipeDto.isPublic ? '공개' : '비공개'}"></p>
-    <p class="cre"th:text="'생성 날짜: ' + ${#temporals.format(recipeDto.createdAt, 'yyyy년 MM월 dd일')}"></p>
+    <p class="cre" th:text="'생성 날짜: ' + ${#temporals.format(recipeDto.createdAt, 'yyyy년 MM월 dd일')}"></p>
+    <button>다른 사람에게 공유할래요</button>
+
+    <!-- id 값을 담을 hidden form -->
+    <form id="idForm" style="display: none;">
+        <input type="hidden" id="recipeId" name="recipeId" th:value="${recipeDto.getRecipeId()}">
+    </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+</script>
 </body>
 </html>

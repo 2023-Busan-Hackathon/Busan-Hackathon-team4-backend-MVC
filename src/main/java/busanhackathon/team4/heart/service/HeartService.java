@@ -33,4 +33,10 @@ public class HeartService {
                 .build();
         return heartRepository.save(heart).getId();
     }
+
+    @Transactional(readOnly = true)
+    public Integer getHeartCountByMember(String username) {
+        Integer heartCount = heartRepository.findHeartCountByLoginId(username);
+        return heartCount;
+    }
 }

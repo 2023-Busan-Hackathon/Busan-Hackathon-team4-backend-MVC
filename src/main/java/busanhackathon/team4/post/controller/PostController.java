@@ -30,8 +30,9 @@ public class PostController {
      * 게시글 목록
      */
     @GetMapping("/postList")
-    public String getPostList(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String getPostList(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
         List<PostDto> postDtoList = postService.findAllPost(principalDetails.getLoginId());
+        model.addAttribute("postDtoList", postDtoList);
         return "/post/postList";
     }
 

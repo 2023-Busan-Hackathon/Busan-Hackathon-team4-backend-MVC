@@ -1,10 +1,14 @@
 package busanhackathon.team4.member.controller;
 
+import busanhackathon.team4.member.dto.MyInfoDto;
 import busanhackathon.team4.member.service.MemberService;
+import busanhackathon.team4.security.PrincipalDetails;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,7 +51,9 @@ public class MemberController {
      * 마이페이지 이동
      */
     @GetMapping("myPage")
-    public String myPage() {
+    public String myPage(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+        MyInfoDto myInfoDto = memberService.myPageInfo(principalDetails.getLoginId());
+        model.addAttribute("myInfoDto", myInfoDto);
         return "member/myPage";
     }
 

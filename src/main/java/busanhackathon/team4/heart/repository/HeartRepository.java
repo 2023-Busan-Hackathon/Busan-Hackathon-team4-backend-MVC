@@ -14,4 +14,6 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
     @Query("select h from Heart h join fetch h.post p where h.member.loginId = :username")
     List<Heart> findByMemberId(@Param("username") String username);
 
+    @Query("select count(h) from Heart h where h.member.loginId = :username")
+    Integer findHeartCountByLoginId(@Param("username") String username);
 }

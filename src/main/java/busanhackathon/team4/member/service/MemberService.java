@@ -1,10 +1,13 @@
 package busanhackathon.team4.member.service;
 
+import busanhackathon.team4.heart.service.HeartService;
 import busanhackathon.team4.member.controller.MemberController;
+import busanhackathon.team4.member.dto.MyInfoDto;
 import busanhackathon.team4.member.entity.Member;
 import busanhackathon.team4.member.entity.Role;
 import busanhackathon.team4.member.repository.MemberRepository;
 import busanhackathon.team4.security.PrincipalDetails;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,6 +30,7 @@ public class MemberService implements UserDetailsService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 //    private final PasswordEncoder encoder;
     private final BCryptPasswordEncoder encoder;
+    private final HeartService heartService;
 
     /**
      * 회원가입
@@ -61,4 +65,17 @@ public class MemberService implements UserDetailsService {
 
     }
 
+    public MyInfoDto myPageInfo(String loginId) {
+        Integer heartCount = heartService.getHeartCountByMember(loginId);
+
+        Member member = memberRepository.findByLoginId(loginId)
+                .orElseThrow(() -> new EntityNotFoundException("없는 회원입니다."));
+
+        MyInfoDto myInfoDto = MyInfoDto.builder()
+                .memberId(member.getId())
+                .nickname(member.getNickname())
+                .heartCount(heartCount)
+                .build();
+        return myInfoDto;
+    }
 }
