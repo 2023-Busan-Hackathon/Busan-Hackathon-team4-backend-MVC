@@ -43,6 +43,14 @@ public class MemberController {
         return "member/login";
     }
 
+    /**
+     * 마이페이지 이동
+     */
+    @GetMapping("myPage")
+    public String myPage() {
+        return "member/myPage";
+    }
+
     @Getter @Setter
     @NoArgsConstructor
     @AllArgsConstructor
