@@ -22,7 +22,8 @@ public class FoodService {
     private final FoodRepository foodRepository;
     private final MemberRepository memberRepository;
 
-    public Long enrollFood(String username, FoodDto foodDto) {
+    public Long
+    enrollFood(String username, FoodDto foodDto) {
         Member member = memberRepository.findByLoginId(username)
                 .orElseThrow(() -> new EntityNotFoundException("없는 회원 입니다."));
         Food food = Food.builder().foodName(foodDto.getFoodName()).member(member).build();

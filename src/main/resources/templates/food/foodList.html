@@ -1,10 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Add Restricted Foods</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        nav {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            width: 100%;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        nav .logo a {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        nav .menu {
+            margin-left: auto;
+        }
+
+        nav .mypage a {
+            background-color: #fff;
+            color: #333;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #foodInput {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px 0 0 5px;
+        }
+
+        #addButton {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        #addButton:hover {
+            background-color: #0056b3;
+        }
+
+        #foodList {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+        }
+
+        /* Style for each food item */
+        .food-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+
+        .food-name {
+            flex: 1;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .delete-button {
+            padding: 5px 10px;
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+
+        .form-container {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+    </style>
+    </style>
 </head>
+
 <body>
+<nav>
+    <div class="logo">
+        <a href="/ai">Logo</a>
+    </div>
+    <div class="menu">
+        <a href="/ai">추천받기</a>
+        <a href="postList">둘러보기</a>
+    </div>
+    <div class="mypage">
+        <a href="myPage">마이페이지</a>
+    </div>
+</nav>
+
+<div class="form-container">
+    <h1>못 먹는 음식 다 적어봐~</h1>
+    <form action="/food-enroll" method="post">
+        <div class="input-container">
+            <input type="text" id="foodInput" name="foodName" placeholder="Enter food name"/>
+            <button id="addButton" type="submit">Add</button>
+        </div>
+    </form>
+    <div id="foodList">
+        <div th:each="foodDto : ${foodDtoList}" class="food-item">
+            <span class="food-name" th:text="${foodDto.foodName}"></span>
+            <button class="delete-button" th:onclick="'javascript:deleteFood(' + ${foodDto.foodId} + ')'" type="button">Delete</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function deleteFood(foodId) {
+        if (confirm("삭제할까?")) {
+            // 서버로 데이터 보내기
+            $.ajax({
+                type: 'POST',
+                url: '/food/' + foodId,
+                success: function (data) {
+                    // 성공적으로 삭제되었을 때 실행되는 부분 (Optional)
+                    console.log('음식이 성공적으로 삭제되었습니다.');
+                    // 페이지 리로드
+                    location.reload();
+                },
+                error: function () {
+                    // 요청이 실패했을 때 실행되는 부분 (Optional)
+                    console.error('음식 삭제 요청이 실패하였습니다.');
+                },
+            });
+        }
+    }
+</script>
 
 </body>
 </html>

@@ -32,6 +32,8 @@ public class RecipeService {
         Recipe recipe = Recipe.builder()
                 .foodName(recipeDto.getFoodName())
                 .method(recipeDto.getMethod())
+                .ingredient(recipeDto.getIngredient())
+                .gptResponse(recipeDto.getGptResponse())
                 .isPublic(false)
                 .member(member)
                 .build();
@@ -67,6 +69,8 @@ public class RecipeService {
                         .recipeId(recipe.getId())
                         .foodName(recipe.getFoodName())
                         .method(recipe.getMethod())
+                        .gptResponse(recipe.getGptResponse())
+                        .ingredient(recipe.getIngredient())
                         .isPublic(recipe.getIsPublic())
                         .build())
                 .collect(Collectors.toList());
@@ -96,7 +100,9 @@ public class RecipeService {
         RecipeDto recipeDto = RecipeDto.builder()
                 .recipeId(recipe.getId())
                 .foodName(recipe.getFoodName())
+                .ingredient(recipe.getIngredient())
                 .method(recipe.getMethod())
+                .gptResponse(recipe.getGptResponse())
                 .isPublic(recipe.getIsPublic())
                 .createdAt(recipe.getCreatedAt())
                 .build();

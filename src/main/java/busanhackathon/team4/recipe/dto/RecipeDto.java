@@ -14,6 +14,8 @@ public class RecipeDto {
     private Long recipeId;
     private String foodName;
     private String method;
+    private String gptResponse;
+    private String ingredient;
     private Boolean isPublic;
 
     private LocalDateTime createdAt;

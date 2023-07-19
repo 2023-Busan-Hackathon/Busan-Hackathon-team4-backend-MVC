@@ -27,13 +27,13 @@ public class FoodController {
         return "/food/foodList";
     }
 
-    @PostMapping("/food")
+    @PostMapping("/food-enroll")
     public String banFood(@AuthenticationPrincipal PrincipalDetails principalDetails, FoodDto foodDto) {
         Long foodId = foodService.enrollFood(principalDetails.getLoginId(), foodDto);
         return "redirect:/food";
     }
 
-    @DeleteMapping("/food/{foodId}")
+    @PostMapping("/food/{foodId}")
     public String removeBanFood(@PathVariable("foodId") Long foodId) {
         foodService.removeFood(foodId);
         return "redirect:/food";
