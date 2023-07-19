@@ -20,6 +20,8 @@ public class Recipe extends BaseEntity {
 
     private String foodName;
     @Column(columnDefinition = "text")
+    private String ingredient;
+    @Column(columnDefinition = "text")
     private String method;
     private Boolean isPublic;
 
