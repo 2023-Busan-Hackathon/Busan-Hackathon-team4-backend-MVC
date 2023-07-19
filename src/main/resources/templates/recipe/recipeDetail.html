@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>Recipe Detail</title>
     <style>
         body {
             margin: 0;
@@ -46,45 +46,59 @@
             border-radius: 5px;
             text-decoration: none;
         }
-        #result-container {
-            margin-top: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
+
+        .recipe-detail {
+            margin: 20px;
             max-width: 600px;
-            background-color: #f8f8f8;
-            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .recipe-detail h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .recipe-detail p {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        /* '공개 여부' 텍스트의 색상을 파란색으로 설정 */
+        .pub {
+            color: #007bff;
+        }
+
+        /* '생성 날짜' 텍스트의 색상을 초록색으로 설정 */
+        .cre {
+            color: #28a745;
         }
     </style>
 </head>
 <body>
 <nav>
     <div class="logo">
-        <a href="/ai">Logo</a>
+        <a href="home.html">Logo</a>
     </div>
     <div class="menu">
-        <a href="/ai">추천받기</a>
-        <a href="postList">둘러보기</a>
+        <a href="home.html">Home</a>
+        <a href="#">Communite</a>
     </div>
     <div class="mypage">
-        <a href="myPage">마이페이지</a>
+        <a href="#">마이페이지</a>
     </div>
 </nav>
 
-<div class="result-container" id="result-container">
-    <div id="result-content">
-        
-    </div>
+<div class="recipe-detail">
+    <h1 th:text="${recipeDto.foodName}"></h1>
+    <p th:utext="'<h3>재료:</h3>' + ${recipeDto.ingredient}"></p>
+    <p th:utext="'<h3>조리 방법:</h3>' + ${recipeDto.method}"></p>
+    <p class="pub" th:text="'공개 여부: ' + ${recipeDto.isPublic ? '공개' : '비공개'}"></p>
+    <p class="cre"th:text="'생성 날짜: ' + ${#temporals.format(recipeDto.createdAt, 'yyyy년 MM월 dd일')}"></p>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/marked@3.0.8/marked.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-
-    });
-</script>
 </body>
 </html>

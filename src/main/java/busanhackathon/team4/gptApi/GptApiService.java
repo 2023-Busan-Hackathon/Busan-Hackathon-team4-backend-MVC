@@ -51,7 +51,8 @@ public class GptApiService {
 
 
             String result = "### 음식이름:\n" +
-                    "-김치 우유 볶음\n" +
+                    "- 김치 우유 볶음\n" +
+                    "\n" +
                     "### 재료:\n" +
                     "- 당근\n" +
                     "- 우유\n" +

@@ -51,6 +51,15 @@ nav .mypage a {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 30px;
+    opacity: 0; /* Start with opacity 0 to make it invisible */
+    transform: translateY(-50px); /* Move it 50px up initially */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Define the animation transition properties */
+}
+
+body.loaded .form-container {
+    /* Once the page is loaded, apply these styles to make the form-container visible */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 h2 {
@@ -193,9 +202,10 @@ input[type="radio"]:nth-child(3):checked + label {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#result-content h1 {
-    font-size: 24px;
+#result-container h1 {
+    font-size: 36px;
     margin-bottom: 10px;
+    color: #ff6f69;
 }
 
 #result-content ul {

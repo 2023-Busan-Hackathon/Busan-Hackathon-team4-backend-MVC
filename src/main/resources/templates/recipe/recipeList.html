@@ -101,7 +101,7 @@
     </div>
 </nav>
 <div class="recipe-list">
-    <h1>Recipe List</h1>
+    <h1 style="text-align:center">저장한 레시피</h1>
     <div class="cards-container" id="recipe-cards"></div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/marked@3.0.8/marked.min.js"></script>
@@ -119,7 +119,7 @@
                     response.forEach(function(recipe) {
                         var card ="<a href='/recipe/" + recipe.recipeId + "'>" +"<div class='card'>" +
                             "<h2 class='card-title'>" + recipe.foodName + "</h2>" +
-                            "<div class='card-content'>"+marke  d(recipe.method)+"</div>"+
+                            "<div class='card-content'>"+marked(recipe.method)+"</div>"+
                             "</div>" + "</a>";
                         recipeCardsContainer.append(card);
                     });

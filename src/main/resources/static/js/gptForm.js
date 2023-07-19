@@ -4,6 +4,9 @@ $(document).ready(function () {
     let gpt_ingredient;
     let gpt_recipe;
     let gpt_response;
+    $(document).ready(function() {
+        $('body').addClass('loaded');
+    });
 
     let call_btn = $('#start-call');
     call_btn.click(function (event) {
