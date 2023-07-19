@@ -1,5 +1,10 @@
 // jQuery code (optional, for some interactive features if needed)
 $(document).ready(function () {
+    let gpt_food;
+    let gpt_ingredient;
+    let gpt_recipe;
+    let gpt_response;
+
     let call_btn = $('#start-call');
     call_btn.click(function (event) {
         console.log('클릭함수 진입');
@@ -17,6 +22,11 @@ $(document).ready(function () {
             success: function (result) {
                 if (result) {
                     let markGptResponse = marked(result.gptResponse);
+                    gpt_response = result.gptResponse;
+                    gpt_food = result.food;
+                    gpt_ingredient = result.ingredient;
+                    gpt_recipe = result.recipe;
+
                     $("#loading").fadeOut(200, function () {
                         $('#result-container').fadeIn(500);
                         $("#result-content").html(markGptResponse);
@@ -30,4 +40,19 @@ $(document).ready(function () {
             },
         });
     });
+
+    $('#save-recipe').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/recipe', // 서버로 경로 지정 (닉네임 중복 체크)
+            headers: { 'Content-Type': 'application/json' }, // json 데이터로 지정
+            data: JSON.stringify({
+                foodName: gpt_food,
+                method: gpt_recipe,
+                ingredient: gpt_ingredient,
+                gptResponse: gpt_response
+            }) // JSON 형식으로 데이터 전송
+        });
+        alert("저장했슝");
+    })
 });
