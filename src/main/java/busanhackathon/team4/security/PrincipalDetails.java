@@ -1,6 +1,6 @@
 package busanhackathon.team4.security;
 
-import colony.webproj.entity.Role;
+import busanhackathon.team4.member.entity.Role;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
