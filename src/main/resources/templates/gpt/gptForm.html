@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Website</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/gptForm.css">
 </head>
 <body>
 <nav>
@@ -22,32 +22,34 @@
 <!-- Your page content goes here -->
 <div class="form-container">
     <h2>요리할 재료를 입력하세요</h2>
-    <form id="recipe-form" action="ai" method="post">
+<!--    <form id="recipe-form" action="ai" method="post">-->
         <div class="form-group">
             <textarea id="ingredients" name="ingredient" placeholder="예) 당근, 양파, 감자 등"></textarea>
         </div>
         <div class="form-group difficulty">
             <span>난이도:</span>
             <div class="toggle">
-                <input type="radio" name="difficulty" id="easy" value="easy">
+                <input type="radio" name="difficulty" id="easy" value="쉬움">
                 <label for="easy">쉬움</label>
-                <input type="radio" name="difficulty" id="medium" value="medium">
+                <input type="radio" name="difficulty" id="medium" value="중간">
                 <label for="medium">중간</label>
-                <input type="radio" name="difficulty" id="hard" value="hard">
+                <input type="radio" name="difficulty" id="hard" value="어려움">
                 <label for="hard">어려움</label>
             </div>
         </div>
-        <button type="submit">요리 시작!</button>
-    </form>
+        <button id="start-call">요리 시작!</button>
+<!--    </form>-->
     <div class="loading" id="loading"></div>
 </div>
 
 <div class="result-container" id="result-container" style="display: none;">
-    <div id="result-content"></div>
+    <div id="result-content">
+
+    </div>
     <button id="replay-button">재추천</button>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="script.js"></script>
+<script src="gptForm.js"></script>
 </body>
 </html>
