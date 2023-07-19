@@ -97,11 +97,16 @@ public class RecipeService {
     public RecipeDto findOneById(Long recipeId) {
         Recipe recipe = recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new EntityNotFoundException("없는 레시피입니다."));
+        String ingredient = recipe.getIngredient();
+        String method = recipe.getMethod();
+        String formattedIngredient = ingredient.replaceAll("\n", "<br>");
+        String formattedMethod = method.replaceAll("\n", "<br>");
+
         RecipeDto recipeDto = RecipeDto.builder()
                 .recipeId(recipe.getId())
                 .foodName(recipe.getFoodName())
-                .ingredient(recipe.getIngredient())
-                .method(recipe.getMethod())
+                .ingredient(formattedIngredient)
+                .method(formattedMethod)
                 .gptResponse(recipe.getGptResponse())
                 .isPublic(recipe.getIsPublic())
                 .createdAt(recipe.getCreatedAt())
