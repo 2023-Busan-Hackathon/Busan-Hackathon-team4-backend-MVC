@@ -1,10 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            width: 100%;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        nav .logo a {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        nav .menu {
+            margin-left: auto;
+        }
+
+        nav .mypage a {
+            background-color: #fff;
+            color: #333;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        #result-container {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+    </style>
 </head>
 <body>
+<nav>
+    <div class="logo">
+        <a href="/ai">Logo</a>
+    </div>
+    <div class="menu">
+        <a href="/ai">추천받기</a>
+        <a href="postList">둘러보기</a>
+    </div>
+    <div class="mypage">
+        <a href="myPage">마이페이지</a>
+    </div>
+</nav>
 
+<div class="result-container" id="result-container">
+    <div id="result-content">
+        
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@3.0.8/marked.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+    });
+</script>
 </body>
 </html>

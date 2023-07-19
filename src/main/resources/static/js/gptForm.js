@@ -54,7 +54,7 @@ $(document).ready(function () {
             }), // JSON 형식으로 데이터 전송
             success: function (result) {
                 alert("저장했슝");
-                window.location.href = '/recipe';
+                window.location.href = '/recipe-list';
             },
             error: function () {
                 alert('서버 오류가 발생했습니다.');

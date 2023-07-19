@@ -21,14 +21,23 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     /**
-     * 레시피 목록
+     * 레시피 목록 페이지 이동
+     */
+    @GetMapping("/recipe-list")
+    public String recipeListPage() {
+        return "/recipe/recipeList";
+    }
+
+    /**
+     * 레시피 목록 반환
      */
     @GetMapping("/recipe")
-    public String getRecipeList(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+    @ResponseBody
+    public ResponseEntity<?> getRecipeList(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
         List<RecipeDto> recipeDtoList = recipeService.findAllRecipeByMember(principalDetails.getLoginId());
         model.addAttribute("recipeDtoList", recipeDtoList);
 
-        return "recipe/recipeList";
+        return ResponseEntity.ok(recipeDtoList);
     }
 
     /**

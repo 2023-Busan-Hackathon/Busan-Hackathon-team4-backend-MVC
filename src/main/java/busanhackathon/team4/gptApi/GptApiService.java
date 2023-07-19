@@ -36,32 +36,55 @@ public class GptApiService {
             System.out.println("=====쿼리=====");
 
             // 파이썬 실행 명령과 파일 경로
-            String command = "python";
-            String filePath = "src/main/java/busanhackathon/team4/gptApi/gptApi.py";
+//            String command = "python";
+//            String filePath = "src/main/java/busanhackathon/team4/gptApi/gptApi.py";
+//
+//
+//            ProcessBuilder processBuilder = new ProcessBuilder(command, filePath, query);
+//            Process process = processBuilder.start();
+//
+//            // 실행 결과 읽기
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
+//
+//            // 오류 읽기
+//            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), "UTF-8"));
 
 
-            ProcessBuilder processBuilder = new ProcessBuilder(command, filePath, query);
-            Process process = processBuilder.start();
-
-            // 실행 결과 읽기
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
-
-            // 오류 읽기
-            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), "UTF-8"));
-
-
-            String result = "";
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);  // 실행 결과 출력
-                result += line + "\n";
-            }
-            while ((line = errorReader.readLine()) != null) {
-                log.info("예외터짐");
-                System.out.println(line);
-                result += line + "\n";
-            }
+            String result = "### 음식이름:\n" +
+                    "-김치 우유 볶음\n" +
+                    "### 재료:\n" +
+                    "- 당근\n" +
+                    "- 우유\n" +
+                    "- 밀가루\n" +
+                    "- 설탕\n" +
+                    "- 계란\n" +
+                    "- 베이킹 파우더\n" +
+                    "- 소금\n" +
+                    "- 바닐라 추출물\n" +
+                    "- 식용유\n" +
+                    "- 크림치즈\n" +
+                    "- 파우더 슈가\n" +
+                    "\n" +
+                    "### 레시피:\n" +
+                    "1. 당근을 손질하여 껍질을 벗기고 가늘게 다지세요.\n" +
+                    "2. 당근 다진 것과 우유를 함께 넣은 볼에 좋은 섞여질 때까지 섞어주세요.\n" +
+                    "3. 다른 볼에 밀가루, 설탕, 계란, 베이킹 파우더, 소금, 바닐라 추출물을 넣고 섞어주세요.\n" +
+                    "4. 3번 볼에 2번 볼의 당근과 우유를 넣고 섞어주세요.\n" +
+                    "5. 팬에 식용유를 두르고 4번 볼의 혼합물을 부어서 약한 불에서 국자로 반죽의 가득 차지 않도록 튀겨주세요.\n" +
+                    "6. 팬이 뜨거워질 때까지 기다리고 천천히 뒤집어서 튀깁니다.\n" +
+                    "7. 반복해서 5번과 6번을 하여 반죽을 전부 사용합니다.\n" +
+                    "8. 크림치즈와 파우더 슈가를 섞어서 당근 케이크 위에 발라주시면 완성입니다!";
+//            String line;
+//
+//            while ((line = reader.readLine()) != null) {
+//                System.out.println(line);  // 실행 결과 출력
+//                result += line + "\n";
+//            }
+//            while ((line = errorReader.readLine()) != null) {
+//                log.info("예외터짐");
+//                System.out.println(line);
+//                result += line + "\n";
+//            }
 
 
             // Extracting the recommended food name
@@ -138,8 +161,8 @@ public class GptApiService {
                     .build();
 
             // 프로세스 종료 대기
-            int exitCode = process.waitFor();
-            System.out.println("Exit Code: " + exitCode);
+//            int exitCode = process.waitFor();
+//            System.out.println("Exit Code: " + exitCode);
             return responseDto;
         } catch (Exception e) {
             e.printStackTrace();
