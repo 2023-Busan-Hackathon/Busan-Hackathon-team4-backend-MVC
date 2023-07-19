@@ -45,7 +45,7 @@ public class RecipeController {
      */
     @GetMapping("/recipe/{recipeId}")
     public String getRecipeDetail(@PathVariable("recipeId") Long recipeId, Model model) {
-        RecipeDto recipeDto = recipeService.findOneById(recipeId);
+        RecipeDto recipeDto = recipeService.findOneById(recipeId, true);
         model.addAttribute("recipeDto", recipeDto);
         return "recipe/recipeDetail";
     }
