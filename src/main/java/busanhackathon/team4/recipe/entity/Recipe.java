@@ -17,8 +17,9 @@ public class Recipe extends BaseEntity {
     @GeneratedValue
     @Column(name = "recipe_id")
     private Long id;
-
     private String foodName;
+    @Column(columnDefinition = "text")
+    private String gptResponse;
     @Column(columnDefinition = "text")
     private String ingredient;
     @Column(columnDefinition = "text")
