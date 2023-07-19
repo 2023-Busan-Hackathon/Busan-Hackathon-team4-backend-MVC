@@ -45,10 +45,11 @@ public class RecipeController {
      * 지피티에서 저장할래요 누르면 저장 하는 url
      */
     @PostMapping("/recipe")
-    public String saveRecipe(@AuthenticationPrincipal PrincipalDetails principalDetails,
-                                             RecipeDto recipeDto) {
+    @ResponseBody
+    public ResponseEntity<?> saveRecipe(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                             @RequestBody RecipeDto recipeDto) {
         Long recipeId = recipeService.saveRecipe(principalDetails.getLoginId(), recipeDto);
-        return "redirect:/recipe";
+        return ResponseEntity.ok(true);
     }
 
     /**

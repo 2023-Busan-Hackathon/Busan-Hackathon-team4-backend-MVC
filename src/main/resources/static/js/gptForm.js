@@ -51,8 +51,14 @@ $(document).ready(function () {
                 method: gpt_recipe,
                 ingredient: gpt_ingredient,
                 gptResponse: gpt_response
-            }) // JSON 형식으로 데이터 전송
+            }), // JSON 형식으로 데이터 전송
+            success: function (result) {
+                alert("저장했슝");
+                window.location.href = '/recipe';
+            },
+            error: function () {
+                alert('서버 오류가 발생했습니다.');
+            },
         });
-        alert("저장했슝");
     })
 });
