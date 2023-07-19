@@ -1,9 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+<nav>
+    <div class="logo">
+        <a href="home.html">Logo</a>
+    </div>
+    <div class="menu">
+        <a href="home.html">Home</a>
+        <a href="#">Communite</a>
+    </div>
+    <div class="mypage">
+        <a href="#">마이페이지</a>
+    </div>
+</nav>
+<!-- Your page content goes here -->
+<div class="form-container">
+    <h2>요리할 재료를 입력하세요</h2>
+    <form id="recipe-form" action="ai" method="post">
+        <div class="form-group">
+            <textarea id="ingredients" name="ingredient" placeholder="예) 당근, 양파, 감자 등"></textarea>
+        </div>
+        <div class="form-group difficulty">
+            <span>난이도:</span>
+            <div class="toggle">
+                <input type="radio" name="difficulty" id="easy" value="easy">
+                <label for="easy">쉬움</label>
+                <input type="radio" name="difficulty" id="medium" value="medium">
+                <label for="medium">중간</label>
+                <input type="radio" name="difficulty" id="hard" value="hard">
+                <label for="hard">어려움</label>
+            </div>
+        </div>
+        <button type="submit">요리 시작!</button>
+    </form>
+    <div class="loading" id="loading"></div>
+</div>
+
+<div class="result-container" id="result-container" style="display: none;">
+    <div id="result-content"></div>
+    <button id="replay-button">재추천</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
