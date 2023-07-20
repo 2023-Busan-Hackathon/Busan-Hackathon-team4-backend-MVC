@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+
   <style>
     nav {
-      background-color: #333;
+      background-color: #ff6f69;; //#333
       color: #fff;
       display: flex;
       align-items: center;
@@ -18,11 +20,28 @@
       color: #fff;
       text-decoration: none;
       margin-right: 20px;
+      font-weight: bold;
     }
 
-    nav .logo a {
-      font-weight: bold;
-      font-size: 1.5rem;
+    nav .logo img {
+      width:50px;
+      height:auto;
+      margin-right:10px;
+      margin-left: 20px;
+    }
+
+    nav .logospan{
+    margin-right: auto;
+    font-family: 'Bagel Fat One', sans-serif;
+    font-size: 1.7rem;
+    }
+
+    nav .menu span {
+            font-size: 1.7rem; /* Change the font size as needed */
+            margin-left: 5px; /* Adds some space between the image and text */
+            font-family: 'Bagel Fat One', sans-serif;
+            vertical-align: middle;
+            height:auto;
     }
 
     nav .menu {
@@ -36,12 +55,19 @@
       border-radius: 5px;
       text-decoration: none;
     }
+
   </style>
 </head>
 <body>
 <nav>
+<!--  <div class="logo">-->
+<!--    <a href="/ai">Logo</a>-->
+<!--  </div>-->
   <div class="logo">
-    <a href="/ai">Logo</a>
+    <img src="/img/brocolli.png" alt="로고">
+  </div>
+  <div class="logospan">
+    <span class="header-title">"모먹을까"</span>
   </div>
   <div class="menu">
     <a href="/ai">추천받기</a>
