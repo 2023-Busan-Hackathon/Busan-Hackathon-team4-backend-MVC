@@ -85,6 +85,7 @@ public class PostService {
                             .viewCount(post.getViewCount())
                             .isHeart(isHeart) // 현재 로그인한 회원이 찜 한 게시글인지 체크 | 했으면 true
                             .createdAt(post.getCreatedAt())
+                            .heartCount(post.getHeartList().size())
                             .build();
                 })
                 .collect(Collectors.toList());

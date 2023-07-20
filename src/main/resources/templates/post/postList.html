@@ -47,7 +47,7 @@
             padding: 20px;
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(to right, #007bff, #00aaff);
+            background: linear-gradient(to right, #ff6f69, #ff9e69);
             color: #fff;
         }
 
@@ -68,6 +68,11 @@
             transform: translateY(-5px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        .post-card .like-button.liked {
+            background-color: #dc3545; /* Red color for liked button */
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -86,9 +91,13 @@
 
 <div class="post-container">
     <!-- Loop through the posts and render them in cards -->
-    <div th:each="post : ${postDtoList}" class="post-card">
+    <div th:each="post : ${postDtoList}" th:href="@{/postList/{postId}(postId=${post.recipeId})}" class="post-card">
         <h2 th:text="${post.title}"></h2>
         <div class="post-content" th:text="${post.content}"></div>
+        <div class="like-section">
+            <button th:id="'likeBtn-' + ${post.postId}" th:class="${post.isHeart ? 'liked' : ''}" class="like-button" th:text="${post.isHeart ? 'Liked' : 'Like'}"></button>
+            <span class="like-count" th:text="${post.heartCount}"></span>
+        </div>
     </div>
 </div>
 
@@ -101,10 +110,47 @@
         $(".post-card").hide().each(function(index) {
             $(this).delay(100 * index).fadeIn(500); // Adjust the delay and fade in speed as needed
         });
+
         $('.post-content').each(function (index, item) {
             var markdownText = $(this).text(); // Get the Markdown content from the element
             var htmlContent = marked(markdownText); // Convert Markdown to HTML
             $(this).html(htmlContent); // Update the element with the HTML content
+        });
+
+        function handleLikeClick(postId) {
+            const likeButton = $('#likeBtn-' + postId);
+            const isLiked = likeButton.hasClass('liked');
+            const likeCountSpan = likeButton.siblings('.like-count');
+            let likeCount = parseInt(likeCountSpan.text());
+
+            // Send a POST request to the backend to toggle the like status
+            $.ajax({
+                type: 'POST',
+                url: '/heart/', // Replace with the actual endpoint to toggle the like status
+                data: {
+                    postId: postId,
+                    isLiked: !isLiked // Toggle the like status
+                },
+                success: function(response) {
+                    // Handle success, e.g., display a success message or update UI
+                    console.log('Like status toggled successfully!');
+                    // Toggle the 'liked' class to change the button color
+                    likeButton.toggleClass('liked', !isLiked);
+                    // Update the like count
+                    likeCount = !isLiked ? likeCount + 1 : likeCount - 1;
+                    likeCountSpan.text(likeCount);
+                },
+                error: function(error) {
+                    // Handle error, e.g., display an error message
+                    console.error('Failed to toggle like status:', error);
+                }
+            });
+        }
+
+        // Bind click event to like buttons
+        $('.like-button').on('click', function() {
+            const postId = $(this).attr('id').split('-')[1];
+            handleLikeClick(postId);
         });
     });
 </script>

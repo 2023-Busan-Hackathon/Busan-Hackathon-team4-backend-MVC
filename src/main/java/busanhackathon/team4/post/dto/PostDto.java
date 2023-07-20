@@ -17,4 +17,5 @@ public class PostDto {
     private String createdBy; // 작성자 
     private Boolean isHeart; // 찜 했는지 체크
     private LocalDateTime createdAt; // 생성 시간
+    private Integer heartCount; // 좋아요 수
 }
