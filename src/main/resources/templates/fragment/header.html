@@ -7,20 +7,28 @@
 
   <style>
     nav {
-      background-color: #ff6f69;; //#333
+      background-color: #ff6f69;
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 10px 20px;
       width: 100%;
+      text-decoration: none;
     }
 
-    nav a {
+    nav a{
+      color: #fff;
+      text-decoration: none;
+      padding: 7px;
+    }
+
+    nav .menu {
       color: #fff;
       text-decoration: none;
       margin-right: 20px;
       font-weight: bold;
+      margin-left: auto;
     }
 
     nav .logo img {
@@ -31,22 +39,9 @@
     }
 
     nav .logospan{
-      color: #fff;
       margin-right: auto;
       font-family: 'Bagel Fat One', sans-serif;
       font-size: 1.7rem;
-    }
-
-    nav .menu span {
-      font-size: 1.7rem; /* Change the font size as needed */
-      margin-left: 5px; /* Adds some space between the image and text */
-      font-family: 'Bagel Fat One', sans-serif;
-      vertical-align: middle;
-      height:auto;
-    }
-
-    nav .menu {
-      margin-left: auto;
     }
 
     nav .mypage a {
@@ -54,21 +49,17 @@
       color: #333;
       padding: 8px 12px;
       border-radius: 5px;
-      text-decoration: none;
     }
 
   </style>
 </head>
 <body>
 <nav>
-<!--  <div class="logo">-->
-<!--    <a href="/ai">Logo</a>-->
-<!--  </div>-->
   <div class="logo">
     <img src="/img/brocolli.png" alt="로고">
   </div>
   <div class="logospan">
-    <span class="header-title">"모먹을까"</span>
+    <a href="/ai" class="header-title">"모먹을까"</a>
   </div>
   <div class="menu">
     <a href="/ai">추천받기</a>
