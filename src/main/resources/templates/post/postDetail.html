@@ -160,6 +160,7 @@
                     // Update the like count
                     likeCount = !isLiked ? likeCount + 1 : likeCount - 1;
                     likeCountSpan.text(likeCount);
+                    location.reload();
                 },
                 error: function(error) {
                     // Handle error, e.g., display an error message
@@ -179,8 +180,6 @@
         var htmlContent = marked(markdownText); // Convert Markdown to HTML
         console.log(htmlContent);
         $('.post-content').html(htmlContent);
-
-
     })
 </script>
 </body>
