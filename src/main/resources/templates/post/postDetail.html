@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             margin: 0;
@@ -125,8 +126,9 @@
     <p th:text="'작성자: ' + ${postDto.createdBy}"></p>
     <p class="post-content" th:text="${postDto.content}"></p>
     <p class="cre" th:text="'생성 날짜: ' + ${#temporals.format(postDto.createdAt, 'yyyy년 MM월 dd일')}"></p>
-    <button th:id="'likeBtn-' + ${postDto.postId}" th:class="${postDto.isHeart ? 'liked' : ''}" class="like-button" th:text="${postDto.isHeart ? 'Liked' : 'Like'}"></button>
-
+    <button th:id="'likeBtn-' + ${postDto.postId}" th:class="${postDto.isHeart ? 'liked' : ''}" class="like-button">
+        <i th:class="${postDto.isHeart ? 'fas fa-heart' : 'far fa-heart'}"></i>
+    </button>
     <!-- id 값을 담을 hidden form -->
     <form id="idForm" style="display: none;">
         <input type="hidden" id="recipeId" name="recipeId" th:value="${postDto.getRecipeId()}">
