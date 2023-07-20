@@ -39,6 +39,7 @@ public class PostService {
         Optional<Post> existPost = postRepository.findByRecipeId(postFormDto.getRecipeId());
         if (existPost.isPresent()) {
             log.info("현재 등록하고자 하는 레시피로 이미 등록된 게시글이 있습니다.");
+            return null;
         }
 
         Member member = memberRepository.findByLoginId(username)
@@ -134,8 +135,8 @@ public class PostService {
 
         PostDto postDto = PostDto.builder()
                 .postId(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
+                .title(post.getTitle()) //음식이름
+                .content(post.getContent()) //전체 지피티 내용
                 .viewCount(post.getViewCount())
                 .createdBy(post.getMember().getNickname())
                 .isHeart(isHeart)

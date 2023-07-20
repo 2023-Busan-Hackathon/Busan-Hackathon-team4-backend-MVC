@@ -132,50 +132,64 @@
 </nav>
 
 <div class="recipe-detail">
-    <h1 th:text="${recipeDto.foodName}"></h1>
-    <p th:utext="'<h3>재료:</h3>' + ${recipeDto.ingredient}"></p>
-    <p th:utext="'<h3>조리 방법:</h3>' + ${recipeDto.method}"></p>
-    <p class="pub" th:text="'공개 여부: ' + ${recipeDto.isPublic ? '공개' : '비공개'}"></p>
-    <p class="cre" th:text="'생성 날짜: ' + ${#temporals.format(recipeDto.createdAt, 'yyyy년 MM월 dd일')}"></p>
-    <button id="share">다른 사람에게 공유할래요</button>
-    <button id="like">좋아요</button>
+    <h1 th:text="${postDto.title}"></h1>
+    <p th:text="'작성자: ' + ${postDto.createdBy}"></p>
+    <p class="post-content" th:text="${postDto.content}"></p>
+    <p class="cre" th:text="'생성 날짜: ' + ${#temporals.format(postDto.createdAt, 'yyyy년 MM월 dd일')}"></p>
+    <button th:id="'likeBtn-' + ${postDto.postId}" th:class="${postDto.isHeart ? 'liked' : ''}" class="like-button" th:text="${postDto.isHeart ? 'Liked' : 'Like'}"></button>
 
     <!-- id 값을 담을 hidden form -->
     <form id="idForm" style="display: none;">
-        <input type="hidden" id="recipeId" name="recipeId" th:value="${recipeDto.getRecipeId()}">
+        <input type="hidden" id="recipeId" name="recipeId" th:value="${postDto.getRecipeId()}">
     </form>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/marked@3.0.8/marked.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(function() {
-        $('#share').click(function() {
-            location.href = '/postForm/' + $('#recipeId').val();
-        });
-
-        $('#like').click(function() {
-            const recipeId = $('#recipeId').val();
-            const isLiked = $(this).hasClass('liked');
+        //좋아요 핸들러
+        function handleLikeClick(postId) {
+            const likeButton = $('#likeBtn-' + postId);
+            const isLiked = likeButton.hasClass('liked');
+            const likeCountSpan = likeButton.siblings('.like-count');
+            let likeCount = parseInt(likeCountSpan.text());
 
             // Send a POST request to the backend to toggle the like status
             $.ajax({
                 type: 'POST',
-                url: '/toggleLikeRecipe', // Replace with the actual endpoint to toggle the like status
+                url: '/heart/', // Replace with the actual endpoint to toggle the like status
                 data: {
-                    recipeId: recipeId,
+                    postId: postId,
                     isLiked: !isLiked // Toggle the like status
                 },
                 success: function(response) {
                     // Handle success, e.g., display a success message or update UI
                     console.log('Like status toggled successfully!');
                     // Toggle the 'liked' class to change the button color
-                    $('#like').toggleClass('liked', !isLiked);
+                    likeButton.toggleClass('liked', !isLiked);
+                    // Update the like count
+                    likeCount = !isLiked ? likeCount + 1 : likeCount - 1;
+                    likeCountSpan.text(likeCount);
                 },
                 error: function(error) {
                     // Handle error, e.g., display an error message
                     console.error('Failed to toggle like status:', error);
                 }
             });
+        }
+
+        // Bind click event to like buttons
+        $('.like-button').on('click', function() {
+            const postId = $(this).attr('id').split('-')[1];
+            handleLikeClick(postId);
         });
+
+        var markdownText = $('.post-content').text(); // Get the Markdown content from the element
+        var htmlContent = marked(markdownText); // Convert Markdown to HTML
+        console.log(htmlContent);
+        $('.post-content').html(htmlContent);
+
+
     })
 </script>
 </body>

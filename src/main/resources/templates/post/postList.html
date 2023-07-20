@@ -73,6 +73,28 @@
             background-color: #dc3545; /* Red color for liked button */
             color: #fff;
         }
+
+        .post-container a {
+            text-decoration: none; /* 밑줄 없애기 */
+            color: inherit; /* 기본 링크 색상 사용 */
+        }
+
+        .like-view-count {
+            display: flex;
+        }
+
+        .like-count,
+        .view-count {
+            display: flex;
+            align-items: center;
+            margin-top: 15px; /* 원하는 크기로 조정 */
+        }
+
+        .like-count i,
+        .view-count i {
+            margin-right: 5px;
+            color: #757575;
+        }
     </style>
 </head>
 <body>
@@ -91,23 +113,24 @@
 
 <div class="post-container">
     <!-- Loop through the posts and render them in cards -->
-    <div th:each="post : ${postDtoList}" th:href="@{/postList/{postId}(postId=${post.recipeId})}" class="post-card">
+    <a th:each="post : ${postDtoList}" th:href="@{/post/{postId}(postId=${post.postId})}" class="post-card">
         <h2 th:text="${post.title}"></h2>
         <div class="post-content" th:text="${post.content}"></div>
-        <div class="like-section">
-            <button th:id="'likeBtn-' + ${post.postId}" th:class="${post.isHeart ? 'liked' : ''}" class="like-button" th:text="${post.isHeart ? 'Liked' : 'Like'}"></button>
-            <span class="like-count" th:text="${post.heartCount}"></span>
-        </div>
-    </div>
+        <span class="like-view-count">
+                    <span class="like-count"><i th:class="${post.isHeart ? 'fas fa-heart' : 'far fa-heart'}"></i> <span th:text="${post.heartCount}"></span></span> &nbsp&nbsp&nbsp
+                    <span class="view-count"><i class="fas fa-eye"></i> <span th:text="${post.viewCount}"></span></span>
+        </span>
+    </a>
 </div>
 
 <!-- Add your JS scripts here to implement the animation -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/marked@3.0.8/marked.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // JS to add animation (e.g., fadeIn) to the post cards
-    $(document).ready(function() {
-        $(".post-card").hide().each(function(index) {
+    $(document).ready(function () {
+        $(".post-card").hide().each(function (index) {
             $(this).delay(100 * index).fadeIn(500); // Adjust the delay and fade in speed as needed
         });
 
@@ -131,7 +154,7 @@
                     postId: postId,
                     isLiked: !isLiked // Toggle the like status
                 },
-                success: function(response) {
+                success: function (response) {
                     // Handle success, e.g., display a success message or update UI
                     console.log('Like status toggled successfully!');
                     // Toggle the 'liked' class to change the button color
@@ -140,7 +163,7 @@
                     likeCount = !isLiked ? likeCount + 1 : likeCount - 1;
                     likeCountSpan.text(likeCount);
                 },
-                error: function(error) {
+                error: function (error) {
                     // Handle error, e.g., display an error message
                     console.error('Failed to toggle like status:', error);
                 }
@@ -148,7 +171,7 @@
         }
 
         // Bind click event to like buttons
-        $('.like-button').on('click', function() {
+        $('.like-button').on('click', function () {
             const postId = $(this).attr('id').split('-')[1];
             handleLikeClick(postId);
         });
