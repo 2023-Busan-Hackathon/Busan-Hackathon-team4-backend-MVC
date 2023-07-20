@@ -28,8 +28,10 @@
 
         .post-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center; /* 중앙 정렬 */
+            flex-wrap: wrap; /* 줄바꿈 설정 */
+            max-width: 1500px; /* 카드가 최대로 표시될 영역 너비 */
+            margin: auto auto; /* 가운데 정렬 */
             padding: 20px;
         }
 
@@ -38,7 +40,8 @@
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            margin: 20px; /* Add spacing between the cards */
+            margin-bottom: 50px; /* Add spacing between the rows of cards */
             overflow: hidden;
         }
 
@@ -72,6 +75,12 @@
         .post-card .like-button.liked {
             background-color: #dc3545; /* Red color for liked button */
             color: #fff;
+            width: 300px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px; /* Add spacing between the cards */
+            margin-bottom: 20px; /* Add spacing between the rows of cards */
+            overflow: hidden;
         }
 
         .post-container a {
@@ -81,13 +90,15 @@
 
         .like-view-count {
             display: flex;
+            margin-left: 10px
         }
 
         .like-count,
-        .view-count {
+        .view-count,
+        .createdBy {
             display: flex;
             align-items: center;
-            margin-top: 15px; /* 원하는 크기로 조정 */
+            margin-top: 25px; /* 원하는 크기로 조정 */
         }
 
         .like-count i,
@@ -107,7 +118,8 @@
         <div class="post-content" th:text="${post.content}"></div>
         <span class="like-view-count">
                     <span class="like-count"><i th:class="${post.isHeart ? 'fas fa-heart' : 'far fa-heart'}"></i> <span th:text="${post.heartCount}"></span></span> &nbsp&nbsp&nbsp
-                    <span class="view-count"><i class="fas fa-eye"></i> <span th:text="${post.viewCount}"></span></span>
+                    <span class="view-count"><i class="fas fa-eye"></i> <span th:text="${post.viewCount}"></span></span> &nbsp&nbsp&nbsp
+                    <span class="createdBy" th:text="'작성자: ' + ${post.createdBy}"></span>
         </span>
     </a>
 </div>

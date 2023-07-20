@@ -73,8 +73,8 @@ public class PostController {
      * 찜목록
      */
     @GetMapping("/post-heart")
-    public String getHeartPostList(@AuthenticationPrincipal User user, Model model) {
-        List<PostDto> postDtoList = postService.findHeartPost(user.getUsername());
+    public String getHeartPostList(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+        List<PostDto> postDtoList = postService.findHeartPost(principalDetails.getUsername());
         model.addAttribute("postDtoList", postDtoList);
         return "/post/postList";
     }
