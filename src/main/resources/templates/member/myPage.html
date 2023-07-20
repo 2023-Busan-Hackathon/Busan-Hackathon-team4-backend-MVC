@@ -13,6 +13,21 @@
             flex-direction: column;
             align-items: center;
             background-color: #f9f9f9;
+            position: relative;
+        }
+
+        .background::after{
+            width: 100%;
+            height: 130%;
+            content: "";
+            background: url("/img/background.jpg");
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-size: cover;
+            background-position: center center;
+            opacity: 0.7;
         }
 
         nav {
@@ -63,6 +78,8 @@
 
         h1 {
             text-align: center;
+            color: #ff6f69; /* Change heading color to a light red */
+            font-size: 2.5rem;
             margin-bottom: 20px;
         }
 
@@ -110,18 +127,20 @@
 <body>
 <div th:replace="~{fragment/header :: header}"></div>
 
-<div class="container">
-    <h1>My Page</h1>
-    <div class="profile-info">
-        <p><strong>회원 명:</strong><span th:text="${myInfoDto.nickname}"></span></p>
-        <p><strong>받은 하트 수: </strong><span th:text="${myInfoDto.heartCount}"></span></p>
-    </div>
+<div class="background">
+    <div class="container">
+        <h1>My Page</h1>
+        <div class="profile-info">
+            <p><strong>회원 명:</strong><span th:text="${myInfoDto.nickname}"></span></p>
+            <p><strong>받은 하트 수: </strong><span th:text="${myInfoDto.heartCount}"></span></p>
+        </div>
 
 
-    <div class="navigation">
-        <a href="/food" class="nav-link">못 먹는 음식</a>
-        <a href="/recipe-list" class="nav-link">저장된 레시피</a>
-        <a href="/post-heart" class="nav-link">찜한 레시피</a>
+        <div class="navigation">
+            <a href="/food" class="nav-link">못 먹는 음식</a>
+            <a href="/recipe-list" class="nav-link">저장된 레시피</a>
+            <a href="/post-heart" class="nav-link">찜한 레시피</a>
+        </div>
     </div>
 </div>
 </body>
