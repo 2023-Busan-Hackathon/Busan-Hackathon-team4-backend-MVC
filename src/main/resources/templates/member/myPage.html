@@ -41,6 +41,11 @@
             margin-bottom: 20px;
         }
 
+        .profile-info img {
+      width:200px;
+      height:auto;
+    }
+
         .profile-info p {
             font-size: 18px;
             margin: 5px;
@@ -81,11 +86,7 @@
 <div th:replace="~{fragment/header :: header}"></div>
 
 <div class="container">
-    <h1>My Page</h1>
-    <div class="profile-info">
-        <p><strong>회원 명:</strong><span th:text="${myInfoDto.nickname}"></span></p>
-        <p><strong>받은 하트 수: </strong><span th:text="${myInfoDto.heartCount}"></span></p>
-    </div>
+<div class="background">
 
 
     <div class="navigation">
