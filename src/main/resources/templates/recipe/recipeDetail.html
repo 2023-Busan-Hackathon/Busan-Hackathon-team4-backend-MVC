@@ -98,18 +98,7 @@
     </style>
 </head>
 <body>
-<nav>
-    <div class="logo">
-        <a href="home.html">Logo</a>
-    </div>
-    <div class="menu">
-        <a href="home.html">Home</a>
-        <a href="#">Communite</a>
-    </div>
-    <div class="mypage">
-        <a href="#">마이페이지</a>
-    </div>
-</nav>
+<div th:replace="~{fragment/header :: header}"></div>
 
 <div class="recipe-detail">
     <h1 th:text="${recipeDto.foodName}"></h1>

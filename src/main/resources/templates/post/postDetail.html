@@ -118,18 +118,7 @@
     </style>
 </head>
 <body>
-<nav>
-    <div class="logo">
-        <a href="home.html">Logo</a>
-    </div>
-    <div class="menu">
-        <a href="ai.html">Home</a>
-        <a href="#">Communite</a>
-    </div>
-    <div class="mypage">
-        <a href="#">마이페이지</a>
-    </div>
-</nav>
+<div th:replace="~{fragment/header :: header}"></div>
 
 <div class="recipe-detail">
     <h1 th:text="${postDto.title}"></h1>
@@ -157,11 +146,12 @@
             // Send a POST request to the backend to toggle the like status
             $.ajax({
                 type: 'POST',
-                url: '/heart/', // Replace with the actual endpoint to toggle the like status
-                data: {
+                url: '/heart', // Replace with the actual endpoint to toggle the like status
+                headers: { 'Content-Type': 'application/json' }, // json 데이터로 지정
+                data: JSON.stringify ({
                     postId: postId,
                     isLiked: !isLiked // Toggle the like status
-                },
+                }),
                 success: function(response) {
                     // Handle success, e.g., display a success message or update UI
                     console.log('Like status toggled successfully!');
@@ -179,10 +169,11 @@
         }
 
         // Bind click event to like buttons
-        $('.like-button').on('click', function() {
+        $('.recipe-detail button').on('click', function() {
             const postId = $(this).attr('id').split('-')[1];
             handleLikeClick(postId);
         });
+
 
         var markdownText = $('.post-content').text(); // Get the Markdown content from the element
         var htmlContent = marked(markdownText); // Convert Markdown to HTML

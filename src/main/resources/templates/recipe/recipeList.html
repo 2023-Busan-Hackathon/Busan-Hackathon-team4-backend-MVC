@@ -88,18 +88,8 @@
     </style>
 </head>
 <body>
-<nav>
-    <div class="logo">
-        <a href="home.html">Logo</a>
-    </div>
-    <div class="menu">
-        <a href="home.html">Home</a>
-        <a href="#">Communite</a>
-    </div>
-    <div class="mypage">
-        <a href="#">마이페이지</a>
-    </div>
-</nav>
+<div th:replace="~{fragment/header :: header}"></div>
+
 <div class="recipe-list">
     <h1 style="text-align:center">저장한 레시피</h1>
     <div class="cards-container" id="recipe-cards"></div>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    nav {
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      width: 100%;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+
+    nav .logo a {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    nav .menu {
+      margin-left: auto;
+    }
+
+    nav .mypage a {
+      background-color: #fff;
+      color: #333;
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="logo">
+    <a href="/ai">Logo</a>
+  </div>
+  <div class="menu">
+    <a href="/ai">추천받기</a>
+    <a href="postList">둘러보기</a>
+  </div>
+  <div class="mypage">
+    <a href="myPage">마이페이지</a>
+  </div>
+</nav>
+</body>
+</html>

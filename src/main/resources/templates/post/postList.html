@@ -98,18 +98,7 @@
     </style>
 </head>
 <body>
-<nav>
-    <div class="logo">
-        <a href="/ai">Logo</a>
-    </div>
-    <div class="menu">
-        <a href="/ai">추천받기</a>
-        <a href="postList">둘러보기</a>
-    </div>
-    <div class="mypage">
-        <a href="myPage">마이페이지</a>
-    </div>
-</nav>
+<div th:replace="~{fragment/header :: header}"></div>
 
 <div class="post-container">
     <!-- Loop through the posts and render them in cards -->
