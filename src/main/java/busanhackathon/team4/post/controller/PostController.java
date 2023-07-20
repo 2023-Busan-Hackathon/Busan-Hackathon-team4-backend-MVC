@@ -3,6 +3,7 @@ package busanhackathon.team4.post.controller;
 import busanhackathon.team4.post.dto.PostDto;
 import busanhackathon.team4.post.dto.PostFormDto;
 import busanhackathon.team4.post.service.PostService;
+import busanhackathon.team4.recipe.dto.RecipeDto;
 import busanhackathon.team4.recipe.service.RecipeService;
 import busanhackathon.team4.security.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
@@ -51,8 +52,10 @@ public class PostController {
     /**
      * 게시글 등록 폼 이동
      */
-    @GetMapping("/post")
-    public String postForm() {
+    @GetMapping("/postForm/{recipeId}")
+    public String postForm(@PathVariable("recipeId") Long recipeId, Model model) {
+        RecipeDto recipeDto = recipeService.findOneById(recipeId, false);
+        model.addAttribute("recipeDto", recipeDto);
         return "/post/postForm";
     }
 
@@ -63,7 +66,7 @@ public class PostController {
     public String enrollPost(@AuthenticationPrincipal PrincipalDetails principalDetails,
                              PostFormDto postFormDto) {
         Long postId = postService.enrollPost(principalDetails.getLoginId(), postFormDto);
-        return "/post/postList";
+        return "redirect:/postList";
     }
 
     /**

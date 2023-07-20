@@ -83,7 +83,7 @@ public class RecipeService {
     public void changePublic(String username, Long recipeId) {
         Recipe recipe = recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new EntityNotFoundException("없는 레시피입니다."));
-        if(!recipe.getMember().getLoginId().equals(username)) {
+        if (!recipe.getMember().getLoginId().equals(username)) {
             log.info("본인이 작성할 글만 권한 공개 설정 가능합니다.");
         }
         // true 값으로 update
@@ -94,19 +94,21 @@ public class RecipeService {
      * 레시피 상세 보기
      */
     @Transactional(readOnly = true)
-    public RecipeDto findOneById(Long recipeId) {
+    public RecipeDto findOneById(Long recipeId, Boolean format) {
         Recipe recipe = recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new EntityNotFoundException("없는 레시피입니다."));
         String ingredient = recipe.getIngredient();
         String method = recipe.getMethod();
-        String formattedIngredient = ingredient.replaceAll("\n", "<br>");
-        String formattedMethod = method.replaceAll("\n", "<br>");
+        if (format) {
+            ingredient = ingredient.replaceAll("\n", "<br>");
+            method = method.replaceAll("\n", "<br>");
+        }
 
         RecipeDto recipeDto = RecipeDto.builder()
                 .recipeId(recipe.getId())
                 .foodName(recipe.getFoodName())
-                .ingredient(formattedIngredient)
-                .method(formattedMethod)
+                .ingredient(ingredient)
+                .method(method)
                 .gptResponse(recipe.getGptResponse())
                 .isPublic(recipe.getIsPublic())
                 .createdAt(recipe.getCreatedAt())

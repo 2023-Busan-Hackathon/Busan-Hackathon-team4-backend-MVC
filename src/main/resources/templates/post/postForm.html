@@ -1,10 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .post-edit-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .post-edit-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        button[type="submit"]:focus {
+            outline: none;
+        }
+    </style>
 </head>
 <body>
+<div class="post-edit-container">
+    <h1>Edit Post</h1>
+    <form id="post-edit-form" action="/post" method="post">
+        <input type="hidden" name="recipeId" th:value="${recipeDto.getRecipeId()}">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" th:value="${recipeDto.foodName}" required>
+        </div>
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" rows="10" required th:text="${recipeDto.gptResponse}"></textarea>
+        </div>
+        <button type="submit">Save Post</button>
+    </form>
+</div>
 
+<!-- Add your JS scripts here to implement the form submission -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // // JS to submit the form when the button is clicked
+    // $(document).ready(function() {
+    //     $("#post-edit-form").submit(function(event) {
+    //         event.preventDefault(); // Prevent default form submission behavior
+    //         // You can add any additional logic or data manipulation here before submitting
+    //         this.submit(); // Submit the form
+    //     });
+    // });
+</script>
 </body>
 </html>
