@@ -25,7 +25,7 @@ public class RecipeController {
      */
     @GetMapping("/recipe-list")
     public String recipeListPage() {
-        return "/recipe/recipeList";
+        return "recipe/recipeList";
     }
 
     /**
@@ -44,7 +44,13 @@ public class RecipeController {
      * 레시피 상세
      */
     @GetMapping("/recipe/{recipeId}")
-    public String getRecipeDetail(@PathVariable("recipeId") Long recipeId, Model model) {
+    public String getRecipeDetail(@RequestParam(value = "errorMessage", required = false) String errorMessage,
+                                  @PathVariable("recipeId") Long recipeId,
+                                  Model model) {
+        if(errorMessage != null) {
+            log.info("예외 발생");
+            model.addAttribute("errorMessage", "현재 등록하고자 하는 레시피로 이미 등록된 게시글이 있습니다");
+        }
         RecipeDto recipeDto = recipeService.findOneById(recipeId, true);
         model.addAttribute("recipeDto", recipeDto);
         return "recipe/recipeDetail";

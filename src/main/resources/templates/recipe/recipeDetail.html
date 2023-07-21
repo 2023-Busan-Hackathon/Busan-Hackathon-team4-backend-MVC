@@ -114,12 +114,27 @@
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:inline="javascript">
+    var errorMessage = /*[[${errorMessage}]]*/ '';
+</script>
 <script>
     $(function() {
         $('#share').click(function() {
             location.href = '/postForm/' + $('#recipeId').val();
         })
     })
+
+    $(function() {
+        // errorMessage가 비어있지 않으면 alert 창으로 에러 메시지 출력
+        if (errorMessage !== '') {
+            alert(errorMessage);
+        }
+
+        $('#share').click(function() {
+            location.href = '/postForm/' + $('#recipeId').val();
+        });
+    });
+
 </script>
 </body>
 </html>

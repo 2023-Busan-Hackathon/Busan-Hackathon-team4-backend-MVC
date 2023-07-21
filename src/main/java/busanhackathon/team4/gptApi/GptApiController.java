@@ -38,7 +38,7 @@ public class GptApiController {
 
     @GetMapping("/ai")
     public String aiForm() {
-        return "/gpt/gptForm";
+        return "gpt/gptForm";
     }
 
     @PostMapping("/ai/history")

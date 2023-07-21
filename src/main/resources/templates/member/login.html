@@ -446,6 +446,10 @@
     </div>
     <!-- END CONTENT SECTION -->
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:inline="javascript">
+    var errorMessage = /*[[${errorMessage}]]*/ '';
+</script>
 
 <script>
     let container = document.getElementById('container')
@@ -458,6 +462,32 @@
     setTimeout(() => {
         container.classList.add('sign-in')
     }, 200)
+
+    // jQuery 문법을 사용한 코드입니다.
+    $(function() {
+        // Function to handle the error message
+        function displayErrorMessage(errorMessage) {
+            alert(errorMessage);
+        }
+
+        // Check if there is an error message in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorMessage = urlParams.get('exception');
+        console.log(errorMessage);
+        if (errorMessage) {
+            // Decode the error message from URL encoding
+            const decodedErrorMessage = decodeURIComponent(errorMessage);
+            displayErrorMessage(decodedErrorMessage);
+        }
+    });
+
+    $(function() {
+        // errorMessage가 비어있지 않으면 alert 창으로 에러 메시지 출력
+        if (errorMessage === '이미 가입된 회원입니다.') {
+            alert(errorMessage);
+        }
+    })
+
 </script>
 </body>
 </html>

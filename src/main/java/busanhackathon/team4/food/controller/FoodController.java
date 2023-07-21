@@ -24,7 +24,7 @@ public class FoodController {
     public String getFoodList(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
         List<FoodDto> foodDtoList = foodService.findAllFoodByMember(principalDetails.getLoginId());
         model.addAttribute("foodDtoList", foodDtoList);
-        return "/food/foodList";
+        return "food/foodList";
     }
 
     @PostMapping("/food-enroll")

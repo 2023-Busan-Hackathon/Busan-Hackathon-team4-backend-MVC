@@ -9,10 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -20,13 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
     private final MemberService memberService;
 
-    /**
-     * 회원가입 폼
-     */
-    @GetMapping("/join")
-    public String joinForm() {
-        return "member/join";
-    }
 
     /**
      * 회원가입
@@ -34,6 +24,9 @@ public class MemberController {
     @PostMapping("/join")
     public String join(JoinFormDto joinFormDto) {
         Long loginID = memberService.saveMember(joinFormDto);
+        if(loginID == null) {
+            return "redirect:/login?errorMessage=true";
+        }
         log.info("회원가입");
         return "redirect:/login";
     }
@@ -42,7 +35,11 @@ public class MemberController {
      * 로그인 폼
      */
     @GetMapping("/login")
-    public String loginForm() {
+    public String loginForm(@RequestParam(value = "errorMessage", required = false) String errorMessage,
+                            Model model) {
+        if(errorMessage != null) {
+            model.addAttribute("errorMessage", "이미 가입된 회원입니다.");
+        }
         log.info("로그인");
         return "member/login";
     }

@@ -34,7 +34,7 @@ public class PostController {
     public String getPostList(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
         List<PostDto> postDtoList = postService.findAllPost(principalDetails.getLoginId());
         model.addAttribute("postDtoList", postDtoList);
-        return "/post/postList";
+        return "post/postList";
     }
 
     /**
@@ -46,7 +46,7 @@ public class PostController {
                                 Model model) {
         PostDto postDto = postService.findOnePost(principalDetails.getLoginId(), postId);
         model.addAttribute("postDto", postDto);
-        return "/post/postDetail";
+        return "post/postDetail";
     }
 
     /**
@@ -56,7 +56,7 @@ public class PostController {
     public String postForm(@PathVariable("recipeId") Long recipeId, Model model) {
         RecipeDto recipeDto = recipeService.findOneById(recipeId, false);
         model.addAttribute("recipeDto", recipeDto);
-        return "/post/postForm";
+        return "post/postForm";
     }
 
     /**
@@ -64,8 +64,12 @@ public class PostController {
      */
     @PostMapping("/post")
     public String enrollPost(@AuthenticationPrincipal PrincipalDetails principalDetails,
-                             PostFormDto postFormDto) {
+                             PostFormDto postFormDto, Model model) {
         Long postId = postService.enrollPost(principalDetails.getLoginId(), postFormDto);
+        if(postId == null) {
+            return "redirect:/recipe/" + postFormDto.getRecipeId() +
+                    "?errorMessage=true";
+        }
         return "redirect:/postList";
     }
 
@@ -76,7 +80,7 @@ public class PostController {
     public String getHeartPostList(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
         List<PostDto> postDtoList = postService.findHeartPost(principalDetails.getUsername());
         model.addAttribute("postDtoList", postDtoList);
-        return "/post/postList";
+        return "post/postList";
     }
 
 

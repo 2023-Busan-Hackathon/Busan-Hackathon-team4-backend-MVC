@@ -39,7 +39,7 @@ public class MemberService implements UserDetailsService {
         
         //중복체크
         Optional<Member> existMember = memberRepository.findByLoginId(joinFormDto.getLoginId());
-        if(!existMember.isEmpty()) throw new IllegalStateException("이미 존재하는 회원입니다.");
+        if(!existMember.isEmpty()) return null;
 
         Member member = Member.builder()
                 .loginId(joinFormDto.getLoginId())
