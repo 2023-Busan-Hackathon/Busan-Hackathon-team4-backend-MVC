@@ -1,9 +1,10 @@
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3307/food-recommendation
+    url: jdbc:mariadb://busan-hackathon.coz9al7ljo0h.ap-northeast-2.rds.amazonaws.com:3306/recommendation
     username: root
-    password: 1234
+    password: 12341234
+
   jpa:
     hibernate:
       ddl-auto: update

@@ -11,3 +11,6 @@ skip-character-set-client-handshake
 
 [mysqldump]
 default-character-set=utf8mb4
+
+[mysqld]
+bind-address=0.0.0.0
