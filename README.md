@@ -32,9 +32,9 @@
 
 <br>
 
-<div align=center><h1>📚 STACKS</h1></div>
+<div><h1>📚 STACKS</h1></div>
 
-<div align=center> 
+<div> 
   <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> 
   <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
   <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=white">
@@ -52,5 +52,8 @@
   <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
   <img src="https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=react&logoColor=black">
   <br>
-
 </div>
+
+## 👥 멤버
+* Backend: [김진수](https://github.com/dgjinsu)
+* Frontend: [김진수](https://github.com/dgjinsu), [오승연](https://github.com/syeony), [최범규](https://github.com/choibumku00)
